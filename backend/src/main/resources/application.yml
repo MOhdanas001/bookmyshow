@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: bookmyshow
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookmyshow
+    username: postgres
+    password: 23#A#khan
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+jwt:
+  secret: dfhu4893n07tv5984ncuje31nc875967h40mcx87h3frgfheuhr7f8
+  expiration: 8460000
