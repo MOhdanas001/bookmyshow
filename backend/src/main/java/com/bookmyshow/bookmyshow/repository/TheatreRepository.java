@@ -4,4 +4,5 @@ import com.bookmyshow.bookmyshow.entities.Theatre;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TheatreRepository extends JpaRepository<Theatre,Long> {
+    boolean existsByNameIgnoreCase(String name);
 }

@@ -49,7 +49,6 @@ public class AuthService {
 
         return AuthResponse.builder()
                 .token(token)
-                .message("Registration successful")
                 .build();
     }
 
@@ -69,7 +68,6 @@ public class AuthService {
 
         return AuthResponse.builder()
                 .token(token)
-                .message("Login successful")
                 .build();
     }
 

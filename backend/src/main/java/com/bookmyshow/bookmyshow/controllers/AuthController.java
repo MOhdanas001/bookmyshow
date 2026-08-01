@@ -1,9 +1,7 @@
 package com.bookmyshow.bookmyshow.controllers;
 
 
-import com.bookmyshow.bookmyshow.DTO.AuthResponse;
-import com.bookmyshow.bookmyshow.DTO.LoginRequest;
-import com.bookmyshow.bookmyshow.DTO.RegisterRequest;
+import com.bookmyshow.bookmyshow.DTO.*;
 import com.bookmyshow.bookmyshow.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,19 +20,31 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(
+    public ResponseEntity<ApiResponse<AuthResponse>> register(
             @Valid @RequestBody RegisterRequest request) {
+       AuthResponse response = authService.register(request);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(authService.register(request));
+                .body(ApiResponse.<AuthResponse>builder()
+                        .success(true)
+                        .message("Registration succesfully")
+                        .data(response)
+                        .build());
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(
+    public ResponseEntity<ApiResponse<AuthResponse>> login(
             @Valid @RequestBody LoginRequest request) {
 
-        return ResponseEntity.ok(authService.login(request));
+        AuthResponse response =authService.login(request);
+
+        return ResponseEntity.ok(ApiResponse.<AuthResponse>builder()
+                .success(true)
+                .message("Login Succesfully")
+                .data(response)
+                .build()
+        );
     }
 
 }

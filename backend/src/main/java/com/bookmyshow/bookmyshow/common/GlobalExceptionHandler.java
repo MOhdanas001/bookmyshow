@@ -2,8 +2,10 @@ package com.bookmyshow.bookmyshow.common;
 
 
 import com.bookmyshow.bookmyshow.DTO.ApiResponse;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class GlobalExceptionHandler {
@@ -35,4 +37,44 @@ public class GlobalExceptionHandler {
                                 .build()
                 );
     }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<Object>> handleJsonError(
+            HttpMessageNotReadableException ex) {
+
+        return ResponseEntity.badRequest().body(
+                ApiResponse.builder()
+                        .success(false)
+                        .message("Invalid request body. Please check your input.")
+                        .data(null)
+                        .build()
+        );
+    }
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiResponse<Object>> handleBadRequest(
+            BadRequestException ex) {
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(
+                        ApiResponse.builder()
+                                .success(false)
+                                .message(ex.getMessage())
+                                .data(null)
+                                .build()
+                );
+    }
+
+    @ExceptionHandler(ApiException.class)
+    public ResponseEntity<ApiResponse<Object>> handleApiException(ApiException ex) {
+
+        return ResponseEntity.status(ex.getStatus())
+                .body(
+                        ApiResponse.builder()
+                                .success(false)
+                                .message(ex.getMessage())
+                                .data(null)
+                                .build()
+                );
+    }
+
 }

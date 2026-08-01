@@ -1,10 +1,9 @@
 package com.bookmyshow.bookmyshow.services;
 
-import com.bookmyshow.bookmyshow.DTO.AuthResponse;
 import com.bookmyshow.bookmyshow.DTO.MovieRequest;
 import com.bookmyshow.bookmyshow.DTO.MovieResponse;
 import com.bookmyshow.bookmyshow.entities.Movie;
-import com.bookmyshow.bookmyshow.repository.MovieRepsitory;
+import com.bookmyshow.bookmyshow.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieService {
 
-    private final MovieRepsitory MovieRepo;
+    private final MovieRepository MovieRepo;
 
     public MovieResponse createMovie(MovieRequest request){
         Movie movie= Movie.builder()
