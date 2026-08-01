@@ -42,7 +42,7 @@ public class  ShowService {
                 request.getShowDate(),
                 request.getShowTime())) {
 
-            throw new BadRequestException(git"Show already exists for this theatre.");
+            throw new BadRequestException("Show already exists for this theatre.");
         }
 
         Show show = Show.builder()
