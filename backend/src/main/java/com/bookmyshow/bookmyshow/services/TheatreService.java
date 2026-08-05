@@ -7,7 +7,7 @@ import com.bookmyshow.bookmyshow.common.ResourceNotFoundException;
 import com.bookmyshow.bookmyshow.entities.Theatre;
 import com.bookmyshow.bookmyshow.repository.TheatreRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
+import com.bookmyshow.bookmyshow.common.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -6,8 +6,8 @@ import type { Movie, MovieInput, PaginatedResponse } from "@/types";
 // Toggle this flag (or drive it from an env var) once the Spring Boot
 // backend is live. Every method below already has the real Axios call
 // written and commented, so flipping USE_MOCK is the only change needed.
-const USE_MOCK = true;
-const RESOURCE = "/movies";
+const USE_MOCK = false;
+const RESOURCE = "/admin/movies";
 
 let db: Movie[] = [...mockMovies];
 

@@ -12,16 +12,16 @@ import { useDashboardStats } from "@/hooks/use-dashboard";
 import { formatCurrency } from "@/lib/utils";
 
 export default function DashboardPage() {
-  const { data: stats, isLoading } = useDashboardStats();
+  // const { data: stats, isLoading } = useDashboardStats();
 
   return (
     <div>
-      <PageHeader
+      {/* <PageHeader
         title="Dashboard"
         description="Welcome back! Here's what's happening across your cinemas today."
-      />
+      /> */}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+      {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {isLoading || !stats ? (
           Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-28 w-full rounded-xl" />)
         ) : (
@@ -50,7 +50,7 @@ export default function DashboardPage() {
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
         <RecentBookings />
         <PopularMovies />
-      </div>
+      </div> */}
     </div>
   );
 }

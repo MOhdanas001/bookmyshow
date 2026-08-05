@@ -58,7 +58,9 @@ export function getMovieColumns({ onView, onEdit, onDelete }: MovieColumnActions
       cell: ({ row }) => (
         <div>
           <p className="font-medium">{row.original.title}</p>
-          <p className="text-xs text-muted-foreground">{row.original.genre.join(", ")}</p>
+          <p className="text-xs text-muted-foreground">
+            {Array.isArray(row.original.genre) ? row.original.genre.join(", ") : row.original.genre}
+          </p>
         </div>
       ),
     },

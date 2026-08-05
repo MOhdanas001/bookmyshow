@@ -3,8 +3,8 @@ import { mockTheatres } from "@/lib/mock-data";
 import { delay, generateId, nowIso } from "@/lib/mock-helpers";
 import type { Theatre, TheatreInput, PaginatedResponse } from "@/types";
 
-const USE_MOCK = true;
-const RESOURCE = "/theatres";
+const USE_MOCK = false;
+const RESOURCE = "/admin/theatres";
 
 let db: Theatre[] = [...mockTheatres];
 

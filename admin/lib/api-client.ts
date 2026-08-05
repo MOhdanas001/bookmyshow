@@ -23,9 +23,19 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-// Normalize errors into a consistent shape the UI can rely on.
+// Normalize response data if wrapped in Spring Boot ApiResponse<T>
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (
+      response.data &&
+      typeof response.data === "object" &&
+      "success" in response.data &&
+      "data" in response.data
+    ) {
+      response.data = response.data.data;
+    }
+    return response;
+  },
   (error: AxiosError<{ message?: string; errors?: Record<string, string> }>) => {
     const status = error.response?.status ?? 500;
     const message =

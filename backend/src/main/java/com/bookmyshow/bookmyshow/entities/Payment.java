@@ -1,5 +1,6 @@
 package com.bookmyshow.bookmyshow.entities;
 
+import com.bookmyshow.bookmyshow.booking.entity.Booking;
 import jakarta.persistence.*;
 import lombok.*;
 

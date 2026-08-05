@@ -1,32 +1,25 @@
 package com.bookmyshow.bookmyshow.entities;
 
+import com.bookmyshow.bookmyshow.booking.entity.Booking;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "bookings")
+@Table(name="booking_seats")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Booking {
+public class BookingSeat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Booking booking;
 
     @ManyToOne
-    @JoinColumn(name = "show_id")
-    private Show show;
-
-    private Integer numberOfSeats;
-
-    private Double totalAmount;
-
-    private String bookingStatus;
+    private Seat seat;
 }

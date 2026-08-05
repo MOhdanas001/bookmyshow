@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Bell, Menu, Moon, Search, Sun, LogOut, Settings, User } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useAuth } from "@/components/auth-context";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -28,6 +29,7 @@ const notifications = [
 
 export function Navbar({ onMenuClick }: NavbarProps) {
   const { theme, setTheme } = useTheme();
+  const { logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/70">
@@ -101,7 +103,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex items-center gap-2 text-destructive focus:text-destructive">
+            <DropdownMenuItem onClick={logout} className="flex items-center gap-2 text-destructive focus:text-destructive cursor-pointer">
               <LogOut className="h-4 w-4" /> Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

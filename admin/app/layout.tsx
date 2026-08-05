@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { AuthProvider } from "@/components/auth-context";
 import { DashboardShell } from "@/components/layout/dashboard-shell";
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <Providers>
-          <DashboardShell>{children}</DashboardShell>
+          <AuthProvider>
+            <DashboardShell>{children}</DashboardShell>
+          </AuthProvider>
         </Providers>
       </body>
     </html>
