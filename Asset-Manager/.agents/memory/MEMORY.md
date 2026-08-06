@@ -1,0 +1,1 @@
+- [OpenAPI validator compatibility](openapi-validator-compatibility.md) — keep generated API schemas portable with the workspace's installed Zod version.

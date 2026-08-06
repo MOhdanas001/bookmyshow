@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Cinema Booking"
+description = "A premium responsive movie discovery and ticket booking frontend with dynamic seat selection, booking flow, user profile, and admin workspace, designed for connection to an existing Spring Boot backend."
+version = "1.0.0"
+id = "artifacts/cinema-booking"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21745
+
+[services.development]
+run = "pnpm --filter @workspace/cinema-booking run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cinema-booking", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/cinema-booking/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21745"
+BASE_PATH = "/"

@@ -1,0 +1,467 @@
+You are a Senior Frontend Engineer.
+
+Build a complete BookMyShow Clone frontend using Next.js 15, TypeScript, Tailwind CSS and shadcn/ui.
+
+The frontend should look and feel similar to the real BookMyShow website but DO NOT copy it exactly.
+
+Create a modern, responsive UI with smooth animations.
+
+Tech Stack
+
+- Next.js 15 (App Router)
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- React Query (TanStack Query)
+- Axios
+- React Hook Form
+- Zod
+- Lucide Icons
+
+Architecture
+
+Use feature-based architecture.
+
+src
+│
+├── app
+├── components
+├── features
+├── services
+├── hooks
+├── lib
+├── types
+├── providers
+└── utils
+
+Use reusable components.
+
+Never duplicate UI.
+
+-------------------------------------------------------
+
+Authentication
+
+Implement
+
+Login
+
+Register
+
+JWT Authentication
+
+Store JWT securely.
+
+Automatically redirect unauthenticated users to login.
+
+-------------------------------------------------------
+
+Home Page
+
+Large Hero Banner
+
+Now Showing Movies
+
+Upcoming Movies
+
+Movie Cards
+
+Search Bar
+
+Movie Categories
+
+Trending Movies
+
+Responsive Carousel
+
+Footer
+
+-------------------------------------------------------
+
+Movie Details Page
+
+Large Movie Poster
+
+Movie Name
+
+Rating
+
+Genre
+
+Language
+
+Duration
+
+Release Date
+
+Description
+
+Book Tickets Button
+
+Available Shows
+
+-------------------------------------------------------
+
+Show Selection Page
+
+Select Theatre
+
+Available Shows
+
+Morning
+
+Afternoon
+
+Evening
+
+Night
+
+Display
+
+Time
+
+Price
+
+-------------------------------------------------------
+
+Seat Selection Page
+
+This page is extremely important.
+
+Generate seats dynamically.
+
+Rows
+
+A
+
+B
+
+C
+
+D
+
+E
+
+...
+
+Seats
+
+A1 A2 A3
+
+B1 B2 B3
+
+Different colors
+
+Available
+
+Selected
+
+Booked
+
+Hover Animation
+
+Price Summary
+
+Seat Count
+
+Continue Button
+
+Keep the seat layout similar to BookMyShow.
+
+-------------------------------------------------------
+
+Booking Summary
+
+Movie
+
+Theatre
+
+Show
+
+Seats
+
+Ticket Price
+
+Convenience Fee
+
+Total Amount
+
+Confirm Booking Button
+
+-------------------------------------------------------
+
+Payment Page
+
+Dummy Payment
+
+Card Number
+
+Name
+
+Expiry
+
+CVV
+
+Pay Button
+
+Success Animation
+
+-------------------------------------------------------
+
+Booking Success Page
+
+Large Success Animation
+
+Booking ID
+
+QR Code Placeholder
+
+Movie
+
+Theatre
+
+Seats
+
+Download Ticket Button
+
+Go Home Button
+
+-------------------------------------------------------
+
+My Bookings
+
+Booking Cards
+
+Movie Poster
+
+Movie Name
+
+Theatre
+
+Date
+
+Time
+
+Seats
+
+Status
+
+Cancel Booking
+
+-------------------------------------------------------
+
+Profile Page
+
+User Information
+
+Edit Profile
+
+Booking History
+
+Logout
+
+-------------------------------------------------------
+
+Admin Dashboard
+
+Dashboard
+
+Movies
+
+Theatres
+
+Shows
+
+Bookings
+
+Users
+
+Settings
+
+Use Sidebar Layout
+
+-------------------------------------------------------
+
+Movies Admin
+
+Table
+
+Create Movie
+
+Edit Movie
+
+Delete Movie
+
+-------------------------------------------------------
+
+Theatres Admin
+
+CRUD
+
+-------------------------------------------------------
+
+Shows Admin
+
+CRUD
+
+-------------------------------------------------------
+
+Bookings Admin
+
+View All Bookings
+
+Cancel Booking
+
+-------------------------------------------------------
+
+API Integration
+
+Backend URL
+
+http://localhost:8080
+
+Authentication
+
+POST /api/v1/auth/login
+
+POST /api/v1/auth/register
+
+Movies
+
+GET /api/v1/movies
+
+GET /api/v1/movies/{id}
+
+Theatres
+
+GET /api/v1/theatres
+
+Shows
+
+GET /api/v1/shows
+
+Bookings
+
+POST /api/v1/bookings
+
+GET /api/v1/bookings/my-bookings
+
+PUT /api/v1/bookings/{id}/cancel
+
+-------------------------------------------------------
+
+Create
+
+Axios Client
+
+JWT Interceptor
+
+Auth Context
+
+React Query Hooks
+
+Movie Service
+
+Show Service
+
+Booking Service
+
+Auth Service
+
+-------------------------------------------------------
+
+UI Requirements
+
+Modern Design
+
+Rounded Cards
+
+Glassmorphism where appropriate
+
+Beautiful Shadows
+
+Smooth Hover Effects
+
+Skeleton Loaders
+
+Empty States
+
+Toast Notifications
+
+Responsive Navbar
+
+Mobile Menu
+
+Dark Mode
+
+Professional Typography
+
+Consistent Color Palette
+
+-------------------------------------------------------
+
+Generate reusable components
+
+MovieCard
+
+MovieCarousel
+
+Navbar
+
+Footer
+
+Seat
+
+SeatGrid
+
+BookingCard
+
+ProfileCard
+
+PageHeader
+
+LoadingSkeleton
+
+SearchBar
+
+Pagination
+
+ProtectedRoute
+
+-------------------------------------------------------
+
+Performance
+
+Image Optimization
+
+Lazy Loading
+
+Code Splitting
+
+React Query Caching
+
+Debounced Search
+
+-------------------------------------------------------
+
+Generate complete project structure.
+
+Generate every page.
+
+Generate all reusable components.
+
+Generate all services.
+
+Generate all hooks.
+
+Generate all API integrations.
+
+Generate routing.
+
+Generate authentication flow.
+
+Generate responsive layouts.
+
+The project should be production-ready and easy to connect to my existing Spring Boot backend.
+
+The UI should look premium and very close to BookMyShow while maintaining its own identity.
