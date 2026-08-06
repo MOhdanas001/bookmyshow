@@ -1,12 +1,17 @@
 import apiClient from "@/lib/api-client";
-import { mockBookings } from "@/lib/mock-data";
-import { delay, nowIso } from "@/lib/mock-helpers";
-import type { Booking, BookingStatus, PaginatedResponse } from "@/types";
+import type {
+  Booking,
+  BookingStatus
+} from "@/types";
+import type {
+  SeatStatus,
+  SeatLockRequest,
+  SeatLockResponse,
+  PaymentRequestData,
+  BookingResponseData
+} from "@/types/booking";
 
-const USE_MOCK = false;
 const RESOURCE = "/bookings";
-
-let db: Booking[] = [...mockBookings];
 
 function normalizeBooking(b: any): Booking {
   const seatsArr = typeof b.seatNumbers === "string"
@@ -31,23 +36,17 @@ function normalizeBooking(b: any): Booking {
 
 export const bookingService = {
   async getAll(): Promise<Booking[]> {
-    if (USE_MOCK) return delay(db);
     const { data } = await apiClient.get<any>(RESOURCE);
     const list = Array.isArray(data) ? data : (data?.content ?? []);
     return list.map(normalizeBooking);
   },
 
   async getById(id: string): Promise<Booking | undefined> {
-    if (USE_MOCK) return delay(db.find((b) => b.id === id));
     const { data } = await apiClient.get<any>(`${RESOURCE}/${id}`);
     return data ? normalizeBooking(data) : undefined;
   },
 
   async updateStatus(id: string, status: BookingStatus): Promise<Booking> {
-    if (USE_MOCK) {
-      db = db.map((b) => (b.id === id ? { ...b, status } : b));
-      return delay(db.find((b) => b.id === id)!);
-    }
     if (status === "cancelled" || (status as string).toUpperCase() === "CANCELLED") {
       const { data } = await apiClient.put<any>(`${RESOURCE}/${id}/cancel`);
       return normalizeBooking(data);
@@ -57,11 +56,34 @@ export const bookingService = {
   },
 
   async remove(id: string): Promise<{ id: string }> {
-    if (USE_MOCK) {
-      db = db.filter((b) => b.id !== id);
-      return delay({ id });
-    }
     await apiClient.delete(`${RESOURCE}/${id}`);
     return { id };
   },
+
+  // Redis Seat Locking & Concurrency Booking endpoints
+  async getShowSeatMap(showId: number, sessionId?: string): Promise<SeatStatus[]> {
+    const params = sessionId ? { sessionId } : {};
+    const { data } = await apiClient.get<SeatStatus[]>(`${RESOURCE}/show/${showId}/seats`, { params });
+    return data;
+  },
+
+  async lockSeats(showId: number, seatNumbers: string[], sessionId?: string): Promise<SeatLockResponse> {
+    const { data } = await apiClient.post<SeatLockResponse>(`${RESOURCE}/lock-seats`, {
+      showId,
+      seatNumbers,
+      sessionId
+    });
+    return data;
+  },
+
+  async unlockSeats(showId: number, seatNumbers: string[], sessionId?: string): Promise<void> {
+    await apiClient.delete(`${RESOURCE}/unlock-seats`, {
+      params: { showId, seatNumbers: seatNumbers.join(","), sessionId }
+    });
+  },
+
+  async confirmBookingAndPay(paymentData: PaymentRequestData): Promise<BookingResponseData> {
+    const { data } = await apiClient.post<BookingResponseData>(`${RESOURCE}/confirm`, paymentData);
+    return data;
+  }
 };

@@ -13,4 +13,6 @@ public interface ShowRepository extends JpaRepository<Show,Long> {
             LocalDate showDate,
             LocalTime showTime
     );
-}
+
+    java.util.List<Show> findByMovieId(Long movieId);
+}

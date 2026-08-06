@@ -39,9 +39,15 @@ public class MovieRequest {
 
     private LocalDate releaseDate;
 
+    @JsonAlias({"posterUrl", "poster"})
     private String posterUrl;
+
+    @JsonAlias({"bannerUrl", "banner", "backdropUrl"})
+    private String bannerUrl;
 
     private Double rating;
 
     private String status;
+
+    private Boolean isActive;
 }

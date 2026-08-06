@@ -1,6 +1,7 @@
 package com.bookmyshow.bookmyshow.common;
 
 import com.bookmyshow.bookmyshow.DTO.ApiResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -34,6 +35,20 @@ public class GlobalExceptionHandler {
                         ApiResponse.builder()
                                 .success(false)
                                 .message(ex.getMessage())
+                                .data(null)
+                                .build()
+                );
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse<Object>> handleDataIntegrityViolation(
+            DataIntegrityViolationException ex) {
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(
+                        ApiResponse.builder()
+                                .success(false)
+                                .message("One or more selected seats have already been booked by another user.")
                                 .data(null)
                                 .build()
                 );

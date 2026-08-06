@@ -49,6 +49,7 @@ public class AuthService {
 
         return AuthResponse.builder()
                 .token(token)
+                .user(mapToUserDto(user))
                 .build();
     }
 
@@ -68,6 +69,17 @@ public class AuthService {
 
         return AuthResponse.builder()
                 .token(token)
+                .user(mapToUserDto(user))
+                .build();
+    }
+
+    public com.bookmyshow.bookmyshow.DTO.UserDto mapToUserDto(User user) {
+        return com.bookmyshow.bookmyshow.DTO.UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .phone(user.getPhone())
+                .role(user.getRole() != null ? user.getRole().name().toLowerCase() : "user")
                 .build();
     }
 

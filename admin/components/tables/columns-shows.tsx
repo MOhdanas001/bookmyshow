@@ -1,12 +1,14 @@
 "use client";
+
 import { type ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal, Pencil, Trash2, Eye } from "lucide-react";
+import { MoreHorizontal, Pencil, Trash2, Eye, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import type { Show } from "@/types";
+import Link from "next/link";
 
 interface ShowColumnActions {
   onView: (show: Show) => void;
@@ -44,6 +46,11 @@ export function getShowColumns({ onView, onEdit, onDelete }: ShowColumnActions):
             <Button variant="ghost" size="icon"><MoreHorizontal className="h-4 w-4" /></Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
+            <DropdownMenuItem asChild>
+              <Link href={`/shows/${row.original.id}/book`} className="flex items-center gap-2 font-semibold text-primary">
+                <Ticket className="h-4 w-4" /> Book Seats
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => onView(row.original)}><Eye className="h-4 w-4" /> View</DropdownMenuItem>
             <DropdownMenuItem onClick={() => onEdit(row.original)}><Pencil className="h-4 w-4" /> Edit</DropdownMenuItem>
             <DropdownMenuSeparator />

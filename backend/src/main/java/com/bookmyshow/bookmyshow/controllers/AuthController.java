@@ -47,4 +47,24 @@ public class AuthController {
         );
     }
 
+    @org.springframework.web.bind.annotation.GetMapping("/me")
+    public ResponseEntity<ApiResponse<UserDto>> getCurrentUser(
+            @org.springframework.security.core.annotation.AuthenticationPrincipal com.bookmyshow.bookmyshow.security.UserPrincipal principal) {
+
+        if (principal == null || principal.getUser() == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(ApiResponse.<UserDto>builder()
+                            .success(false)
+                            .message("Not authenticated")
+                            .data(null)
+                            .build());
+        }
+
+        UserDto userDto = authService.mapToUserDto(principal.getUser());
+        return ResponseEntity.ok(ApiResponse.<UserDto>builder()
+                .success(true)
+                .message("Current user fetched successfully")
+                .data(userDto)
+                .build());
+    }
 }

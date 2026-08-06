@@ -1,23 +1,25 @@
 package com.bookmyshow.bookmyshow.booking.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BookingRequest {
+public class SeatLockRequest {
 
-    @NotNull(message = "Show ID cannot be null")
+    @NotNull(message = "Show ID is required")
     private Long showId;
 
-    @NotBlank(message = "Seat numbers cannot be empty")
-    private String seatNumbers;
+    @NotEmpty(message = "Seat numbers list cannot be empty")
+    private List<String> seatNumbers;
 
-    private String bookingDate;
+    private String sessionId;
 }

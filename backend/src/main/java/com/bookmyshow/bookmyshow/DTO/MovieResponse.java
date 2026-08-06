@@ -34,7 +34,31 @@ public class MovieResponse {
 
     private String posterUrl;
 
+    private String bannerUrl;
+
     private Double rating;
 
     private String status;
+
+    private Boolean isActive;
+
+    public String getPoster() {
+        return posterUrl;
+    }
+
+    public String getBanner() {
+        return bannerUrl != null ? bannerUrl : posterUrl;
+    }
+
+    public String getBackdropUrl() {
+        return bannerUrl != null ? bannerUrl : posterUrl;
+    }
+
+    public List<String> getGenres() {
+        return genre;
+    }
+
+    public Integer getDuration() {
+        return durationMinutes;
+    }
 }

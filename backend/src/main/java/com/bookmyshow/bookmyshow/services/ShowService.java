@@ -103,6 +103,16 @@ public class  ShowService {
                 .toList();
     }
 
+    public List<ShowResponse> getShowsByMovieId(Long movieId) {
+        if (movieId == null) {
+            return getAllShows();
+        }
+        return showRepository.findByMovieId(movieId)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
 
     public void deleteShow(Long id) {
 
@@ -113,17 +123,26 @@ public class  ShowService {
         showRepository.delete(show);
     }
 
-    private ShowResponse mapToResponse(Show show){
+    private List<String> getNext5Days() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        List<String> dates = new java.util.ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            dates.add(today.plusDays(i).toString());
+        }
+        return dates;
+    }
 
+    private ShowResponse mapToResponse(Show show) {
         return ShowResponse.builder()
                 .id(show.getId())
-                .movieId(show.getMovie().getId())
-                .movieName(show.getMovie().getTitle())
-                .theatreId(show.getTheatre().getId())
-                .theatreName(show.getTheatre().getName())
-                .showDate(show.getShowDate())
-                .showTime(show.getShowTime())
+                .movieId(show.getMovie() != null ? show.getMovie().getId() : null)
+                .movieName(show.getMovie() != null ? show.getMovie().getTitle() : null)
+                .theatreId(show.getTheatre() != null ? show.getTheatre().getId() : null)
+                .theatreName(show.getTheatre() != null ? show.getTheatre().getName() : null)
+                .showDate(show.getShowDate() != null ? show.getShowDate() : java.time.LocalDate.now())
+                .showTime(show.getShowTime() != null ? show.getShowTime() : java.time.LocalTime.of(19, 15))
                 .ticketPrice(show.getTicketPrice())
+                .availableDates(getNext5Days())
                 .build();
     }
 }

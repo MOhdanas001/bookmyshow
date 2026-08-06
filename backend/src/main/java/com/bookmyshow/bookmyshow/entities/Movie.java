@@ -38,7 +38,14 @@ public class Movie {
 
     private String posterUrl;
 
+    private String bannerUrl;
+
     private Double rating;
 
     private String status;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean isActive = true;
 }
+

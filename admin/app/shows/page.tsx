@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Plus } from "lucide-react";
 import { PageHeader } from "@/components/shared/page-header";
 import { Button } from "@/components/ui/button";
@@ -98,8 +99,11 @@ export default function ShowsPage() {
                 <p>Ticket price: <span className="font-medium">{formatCurrency(viewingShow.ticketPrice)}</span></p>
                 <p>{viewingShow.availableSeats} / {viewingShow.totalSeats} seats available</p>
               </div>
-              <DialogFooter>
+              <DialogFooter className="gap-2">
                 <Button variant="outline" onClick={() => setViewingShow(null)}>Close</Button>
+                <Button asChild>
+                  <Link href={`/shows/${viewingShow.id}/book`}>Book Seats</Link>
+                </Button>
               </DialogFooter>
             </>
           )}

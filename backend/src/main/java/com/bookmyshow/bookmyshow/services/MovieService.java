@@ -41,13 +41,39 @@ public class MovieService {
                 .durationMinutes(movie.getDurationMinutes())
                 .releaseDate(movie.getReleaseDate())
                 .posterUrl(movie.getPosterUrl())
+                .bannerUrl(movie.getBannerUrl() != null ? movie.getBannerUrl() : movie.getPosterUrl())
                 .rating(movie.getRating())
-                .status(movie.getStatus())
+                .status(movie.getStatus() != null ? movie.getStatus() : "now-showing")
+                .isActive(movie.getIsActive() != null ? movie.getIsActive() : true)
                 .build();
     }
 
     public List<MovieResponse> getAllMovies() {
+        return MovieRepo.findAllActiveMovies()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    public List<MovieResponse> getAllMoviesAdmin() {
         return MovieRepo.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    public List<MovieResponse> searchMovies(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return getAllMovies();
+        }
+        return MovieRepo.searchActiveMovies(keyword.trim())
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    public List<MovieResponse> getTrendingMovies() {
+        return MovieRepo.findTrendingActiveMovies(org.springframework.data.domain.PageRequest.of(0, 10))
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
@@ -71,8 +97,14 @@ public class MovieService {
         movie.setDurationMinutes(request.getDurationMinutes());
         movie.setReleaseDate(request.getReleaseDate());
         movie.setPosterUrl(request.getPosterUrl());
+        if (request.getBannerUrl() != null) {
+            movie.setBannerUrl(request.getBannerUrl());
+        }
         movie.setRating(request.getRating());
         movie.setStatus(request.getStatus());
+        if (request.getIsActive() != null) {
+            movie.setIsActive(request.getIsActive());
+        }
 
         Movie updatedMovie = MovieRepo.save(movie);
 

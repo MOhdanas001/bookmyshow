@@ -18,8 +18,10 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        String roleName = user.getRole() != null ? user.getRole().name().toUpperCase() : "USER";
         return List.of(
-                new SimpleGrantedAuthority(user.getName())
+                new SimpleGrantedAuthority("ROLE_" + roleName),
+                new SimpleGrantedAuthority(roleName)
         );
     }
 
